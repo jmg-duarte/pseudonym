@@ -1,0 +1,19 @@
+[package]
+name = "pseudonym"
+version = "0.1.0"
+edition = "2018"
+authors = [ "José Duarte <duarte.gmj@gmail.com>" ]
+description = "Declare aliases with ease!"
+keywords = ["aliases", "proc-macro"]
+categories = ["development-tools"]
+homepage = "https://github.com/jmg-duarte/pseudonym"
+repository = "https://github.com/jmg-duarte/pseudonym"
+autotests = false
+
+[lib]
+proc-macro = true
+
+[dependencies]
+quote = "1"
+syn = {version = "1", features = ["full"]}
+proc-macro2 = "1"
