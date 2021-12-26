@@ -4,7 +4,7 @@ Declare aliases for Rust constructs with ease!
 
 ```toml
 [dependencies]
-pseudonym = "0.2.0"
+pseudonym = "0.2.1"
 ```
 
 ## Usage
