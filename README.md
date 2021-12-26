@@ -13,7 +13,7 @@ The following example will generate a function
 named `short_name` equal to `very_long_function_name`.
 
 ```rust
-pseudonym::alias;
+use pseudonym::alias;
 #[alias(short_name)]
 fn very_long_function_name() {
     // ...

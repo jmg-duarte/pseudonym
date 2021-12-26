@@ -7,8 +7,8 @@
 //! ## Usage
 //! The following example will generate a function
 //! named `short_name` equal to `very_long_function_name`.
-//! ```rust,ignore
-//! # pseudonym::alias;
+//! ```rust
+//! # use pseudonym::alias;
 //! #[alias(short_name)]
 //! fn very_long_function_name() {
 //!     // ...
@@ -53,8 +53,8 @@ impl IntoIterator for Aliases {
 /// Declare an aliased for the following item.
 ///
 /// Example:
-/// ```rust,ignore
-/// # pseudonym::alias;
+/// ```rust
+/// # use pseudonym::alias;
 /// #[alias(short_name)]
 /// fn very_long_function_name() {
 ///     // ...
