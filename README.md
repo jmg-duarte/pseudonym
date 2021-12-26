@@ -4,7 +4,7 @@ Declare aliases for Rust constructs with ease!
 
 ```toml
 [dependencies]
-pseudonym = "0.1.0"
+pseudonym = "0.2.0"
 ```
 
 ## Usage
@@ -23,6 +23,30 @@ fn main () {
     short_name(); // use the alias!
 }
 ```
+
+### Deprecating Aliases
+
+Sometimes, you'll need to create aliases to old functions which are deprecated.
+`pseudonym` allows you to deprecate aliases using the same syntax as `deprecated`.
+
+```rust
+use pseudonym::alias;
+#[alias(
+    deprecated(
+        old_api_function,
+        since = "0.1.0",
+        note = "This function has been deprecated in favor of `new_api_function`"
+    )
+))]
+fn new_api_function() {
+    // ...
+}
+
+fn main () {
+    short_name(); // use the alias!
+}
+```
+
 
 #### License
 
