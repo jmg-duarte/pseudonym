@@ -66,11 +66,6 @@ impl IntoIterator for Aliases {
 /// ```
 #[proc_macro_attribute]
 pub fn alias(args: TokenStream, input: TokenStream) -> TokenStream {
-    // let alias = match Alias::parse(args) {
-    //     Ok(alias) => alias,
-    //     Err(err) => return err.into_compile_error().into(),
-    // };
-
     let aliases = parse_macro_input!(args as Aliases);
     let parsed_input = parse_macro_input!(input as Item);
 
