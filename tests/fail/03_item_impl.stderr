@@ -1,0 +1,34 @@
+error: unexpected end of input, expected identifier
+ --> tests/fail/03_item_impl.rs:6:1
+  |
+6 | #[alias(S1, S2,)]
+  | ^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `alias` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0599]: no function or associated item named `new` found for struct `S` in the current scope
+  --> tests/fail/03_item_impl.rs:14:19
+   |
+4  | struct S(i32);
+   | -------------- function or associated item `new` not found for this
+...
+14 |     assert_eq!(S::new().0, 5);
+   |                   ^^^ function or associated item not found in `S`
+
+error[E0599]: no function or associated item named `new` found for struct `S1` in the current scope
+  --> tests/fail/03_item_impl.rs:15:20
+   |
+4  | struct S(i32);
+   | -------------- function or associated item `new` not found for this
+...
+15 |     assert_eq!(S1::new().0, 5);
+   |                    ^^^ function or associated item not found in `S1`
+
+error[E0599]: no function or associated item named `new` found for struct `S2` in the current scope
+  --> tests/fail/03_item_impl.rs:16:20
+   |
+4  | struct S(i32);
+   | -------------- function or associated item `new` not found for this
+...
+16 |     assert_eq!(S2::new().0, 5);
+   |                    ^^^ function or associated item not found in `S2`
