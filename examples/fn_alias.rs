@@ -1,12 +1,17 @@
 use pseudonym::alias;
 
-#[alias(b, c)]
-fn a() -> i32 {
-    5
+#[alias(S1, S2)]
+struct S(i32);
+
+#[alias(S1, S2)]
+impl S {
+    fn new() -> Self {
+        Self(5)
+    }
 }
 
 fn main() {
-    assert_eq!(a(), 5);
-    assert_eq!(b(), 5);
-    assert_eq!(c(), 5);
+    assert_eq!(S::new().0, 5);
+    assert_eq!(S1::new().0, 5);
+    assert_eq!(S2::new().0, 5);
 }

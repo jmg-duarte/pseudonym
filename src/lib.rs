@@ -20,12 +20,11 @@
 //! ```
 
 use proc_macro::TokenStream;
-use proc_macro2::Span;
 use syn::{
     parse::{Parse, ParseStream},
     parse_macro_input,
     punctuated::Punctuated,
-    Ident, Item, Token, ItemFn, ItemStruct,
+    Ident, Item, Token, ItemFn, ItemStruct, ItemImpl, Type, spanned::Spanned, TypePath,
 };
 
 struct Aliases {
@@ -68,11 +67,11 @@ impl IntoIterator for Aliases {
 pub fn alias(args: TokenStream, input: TokenStream) -> TokenStream {
     let aliases = parse_macro_input!(args as Aliases);
     let parsed_input = parse_macro_input!(input as Item);
-
     return match parsed_input {
         Item::Fn(item_fn) => expand_fn(item_fn, aliases),
         Item::Struct(item_struct) => expand_struct(item_struct, aliases),
-        _ => syn::Error::new(Span::call_site(), "unsupported item")
+        Item::Impl(item_impl) => expand_impl(item_impl, aliases),
+        _ => syn::Error::new(parsed_input.span(), "unsupported item")
             .to_compile_error()
             .into(),
     };
@@ -104,6 +103,24 @@ fn expand_struct(item_struct: ItemStruct, aliases: Aliases) -> TokenStream {
     quote::quote!(
         #item_struct
         #(#item_struct_aliases)*
+    )
+    .into()
+}
+
+/// Expand [`syn::ItemImpl`] aliases.
+fn expand_impl(item_impl: ItemImpl, aliases: Aliases) -> TokenStream {
+    let item_impl_aliases = aliases.into_iter().map(|ident| {
+        let mut item_impl_alias = item_impl.clone();
+        if let Type::Path(TypePath {ref mut path, ..}) = item_impl_alias.self_ty.as_mut() {
+            let mut first_path_segment = path.segments.first_mut().unwrap();
+            first_path_segment.ident = ident;
+        }
+        item_impl_alias
+    });
+
+    quote::quote!(
+        #item_impl
+        #(#item_impl_aliases)*
     )
     .into()
 }
