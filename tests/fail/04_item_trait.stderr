@@ -1,7 +1,13 @@
 error: unexpected end of input, expected identifier
  --> tests/fail/04_item_trait.rs:3:1
   |
-3 | #[alias(T1, T2,)]
-  | ^^^^^^^^^^^^^^^^^
+3 | / #[alias(
+4 | |     T1,
+5 | |     deprecated(T2),
+6 | |     deprecated(T3, since = "0.1.0"),
+7 | |     deprecated(T4, note = "deprecation note"),
+8 | |     deprecated(T5, since = "0.1.0", note = "deprecation note"),
+9 | | )]
+  | |__^
   |
   = note: this error originates in the attribute macro `alias` (in Nightly builds, run with -Z macro-backtrace for more info)

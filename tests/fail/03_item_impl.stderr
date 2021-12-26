@@ -1,34 +1,58 @@
 error: unexpected end of input, expected identifier
- --> tests/fail/03_item_impl.rs:6:1
-  |
-6 | #[alias(S1, S2,)]
-  | ^^^^^^^^^^^^^^^^^
-  |
-  = note: this error originates in the attribute macro `alias` (in Nightly builds, run with -Z macro-backtrace for more info)
+  --> tests/fail/03_item_impl.rs:6:1
+   |
+6  | / #[alias(
+7  | |     S1,
+8  | |     deprecated(S2),
+9  | |     deprecated(S3, since = "0.1.0"),
+10 | |     deprecated(S4, note = "deprecation note"),
+11 | |     deprecated(S5, since = "0.1.0", note = "deprecation note"),
+12 | | )]
+   | |__^
+   |
+   = note: this error originates in the attribute macro `alias` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0433]: failed to resolve: use of undeclared type `S3`
+  --> tests/fail/03_item_impl.rs:23:16
+   |
+23 |     assert_eq!(S3::new().0, 5);
+   |                ^^ use of undeclared type `S3`
+
+error[E0433]: failed to resolve: use of undeclared type `S4`
+  --> tests/fail/03_item_impl.rs:24:16
+   |
+24 |     assert_eq!(S4::new().0, 5);
+   |                ^^ use of undeclared type `S4`
+
+error[E0433]: failed to resolve: use of undeclared type `S5`
+  --> tests/fail/03_item_impl.rs:25:16
+   |
+25 |     assert_eq!(S5::new().0, 5);
+   |                ^^ use of undeclared type `S5`
 
 error[E0599]: no function or associated item named `new` found for struct `S` in the current scope
-  --> tests/fail/03_item_impl.rs:14:19
+  --> tests/fail/03_item_impl.rs:20:19
    |
 4  | struct S(i32);
    | -------------- function or associated item `new` not found for this
 ...
-14 |     assert_eq!(S::new().0, 5);
+20 |     assert_eq!(S::new().0, 5);
    |                   ^^^ function or associated item not found in `S`
 
 error[E0599]: no function or associated item named `new` found for struct `S1` in the current scope
-  --> tests/fail/03_item_impl.rs:15:20
+  --> tests/fail/03_item_impl.rs:21:20
    |
 4  | struct S(i32);
    | -------------- function or associated item `new` not found for this
 ...
-15 |     assert_eq!(S1::new().0, 5);
+21 |     assert_eq!(S1::new().0, 5);
    |                    ^^^ function or associated item not found in `S1`
 
 error[E0599]: no function or associated item named `new` found for struct `S2` in the current scope
-  --> tests/fail/03_item_impl.rs:16:20
+  --> tests/fail/03_item_impl.rs:22:20
    |
 4  | struct S(i32);
    | -------------- function or associated item `new` not found for this
 ...
-16 |     assert_eq!(S2::new().0, 5);
+22 |     assert_eq!(S2::new().0, 5);
    |                    ^^^ function or associated item not found in `S2`
