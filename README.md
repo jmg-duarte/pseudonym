@@ -8,12 +8,13 @@ pseudonym = "0.2.0"
 ```
 
 ## Usage
+In the following examples the items to which the macro is attached to
+get generated as aliases using the passed identifier.
 
-The following example will generate a function
-named `short_name` equal to `very_long_function_name`.
+### Functions
 
 ```rust
-use pseudonym::alias;
+# use pseudonym::alias;
 #[alias(short_name)]
 fn very_long_function_name() {
     // ...
@@ -21,6 +22,35 @@ fn very_long_function_name() {
 
 fn main () {
     short_name(); // use the alias!
+}
+```
+
+### Structures
+
+```rust
+# use pseudonym::alias;
+#[alias(StructAlias)]
+struct S (i32);
+```
+
+### Traits
+
+```rust
+# use pseudonym::alias;
+#[alias(TraitAlias)]
+trait T {}
+```
+
+### Implementations
+
+```rust
+# use pseudonym::alias;
+#[alias(StructAlias)]
+struct S;
+
+#[alias(StructAlias)]
+impl S {
+    fn new() -> Self { S }
 }
 ```
 
