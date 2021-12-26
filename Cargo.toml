@@ -10,10 +10,17 @@ homepage = "https://github.com/jmg-duarte/pseudonym"
 repository = "https://github.com/jmg-duarte/pseudonym"
 autotests = false
 
+[[test]]
+name = "tests"
+path = "tests/macro_tests.rs"
+
 [lib]
 proc-macro = true
 
 [dependencies]
 quote = "1"
-syn = {version = "1", features = ["full"]}
+syn = {version = "1", features = ["parsing", "extra-traits", "full"]}
 proc-macro2 = "1"
+
+[dev-dependencies]
+trybuild = { version = "1", features = ["diff"]}
