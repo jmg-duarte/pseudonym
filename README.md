@@ -14,7 +14,7 @@ get generated as aliases using the passed identifier.
 ### Functions
 
 ```rust
-# use pseudonym::alias;
+use pseudonym::alias;
 #[alias(short_name)]
 fn very_long_function_name() {
     // ...
@@ -28,7 +28,7 @@ fn main () {
 ### Structures
 
 ```rust
-# use pseudonym::alias;
+use pseudonym::alias;
 #[alias(StructAlias)]
 struct S (i32);
 ```
@@ -36,15 +36,15 @@ struct S (i32);
 ### Traits
 
 ```rust
-# use pseudonym::alias;
-#[alias(TraitAlias)]
+use pseudonym::alias;
+[alias(TraitAlias)]
 trait T {}
 ```
 
 ### Implementations
 
 ```rust
-# use pseudonym::alias;
+use pseudonym::alias;
 #[alias(StructAlias)]
 struct S;
 
