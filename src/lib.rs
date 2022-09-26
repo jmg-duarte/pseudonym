@@ -49,7 +49,7 @@
 //!
 //! #[alias(StructAlias)]
 //! impl S {
-//!     fn new() -> Self { S }
+//!     fn new() -> Self { Self }
 //! }
 //! ```
 use proc_macro::TokenStream;
@@ -200,7 +200,7 @@ impl IntoIterator for Aliases {
 pub fn alias(args: TokenStream, input: TokenStream) -> TokenStream {
     let aliases = parse_macro_input!(args as Aliases);
     let parsed_input = parse_macro_input!(input as Item);
-    return match parsed_input {
+    match parsed_input {
         Item::Fn(item_fn) => expand_fn(item_fn, aliases),
         Item::Struct(item_struct) => expand_struct(item_struct, aliases),
         Item::Impl(item_impl) => expand_impl(item_impl, aliases),
@@ -209,7 +209,7 @@ pub fn alias(args: TokenStream, input: TokenStream) -> TokenStream {
         _ => syn::Error::new(parsed_input.span(), "unsupported item")
             .to_compile_error()
             .into(),
-    };
+    }
 }
 
 #[doc(hidden)]
