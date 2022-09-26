@@ -4,7 +4,7 @@ Declare aliases for Rust constructs with ease!
 
 ```toml
 [dependencies]
-pseudonym = "0.2.1"
+pseudonym = "0.2.2"
 ```
 
 ## Usage
@@ -15,6 +15,7 @@ get generated as aliases using the passed identifier.
 
 ```rust
 use pseudonym::alias;
+
 #[alias(short_name)]
 fn very_long_function_name() {
     // ...
@@ -29,6 +30,7 @@ fn main () {
 
 ```rust
 use pseudonym::alias;
+
 #[alias(StructAlias)]
 struct S (i32);
 ```
@@ -37,7 +39,8 @@ struct S (i32);
 
 ```rust
 use pseudonym::alias;
-[alias(TraitAlias)]
+
+#[alias(TraitAlias)]
 trait T {}
 ```
 
@@ -45,12 +48,13 @@ trait T {}
 
 ```rust
 use pseudonym::alias;
+
 #[alias(StructAlias)]
 struct S;
 
 #[alias(StructAlias)]
 impl S {
-    fn new() -> Self { S }
+    fn new() -> Self { Self }
 }
 ```
 
@@ -61,19 +65,20 @@ Sometimes, you'll need to create aliases to old functions which are deprecated.
 
 ```rust
 use pseudonym::alias;
+
 #[alias(
     deprecated(
         old_api_function,
         since = "0.1.0",
         note = "This function has been deprecated in favor of `new_api_function`"
     )
-))]
+)]
 fn new_api_function() {
     // ...
 }
 
 fn main () {
-    short_name(); // use the alias!
+    old_api_function(); // use the alias!
 }
 ```
 
