@@ -61,7 +61,7 @@ use syn::{
     punctuated::Punctuated,
     spanned::Spanned,
     token::Paren,
-    Ident, Item, ItemFn, ItemImpl, ItemStruct, ItemTrait, LitStr, Token, Type, TypePath,
+    Ident, Item, ItemFn, ItemImpl, ItemStruct, ItemTrait, LitStr, Token, Type, TypePath, ItemConst,
 };
 
 /// [`syn::Ident`] extension functions.
@@ -205,6 +205,7 @@ pub fn alias(args: TokenStream, input: TokenStream) -> TokenStream {
         Item::Struct(item_struct) => expand_struct(item_struct, aliases),
         Item::Impl(item_impl) => expand_impl(item_impl, aliases),
         Item::Trait(item_trait) => expand_trait(item_trait, aliases),
+        Item::Const(item_const) => expand_const(item_const, aliases),
         _ => syn::Error::new(parsed_input.span(), "unsupported item")
             .to_compile_error()
             .into(),
@@ -300,4 +301,18 @@ fn expand_trait(item_trait: ItemTrait, aliases: Aliases) -> TokenStream {
         #(#item_trait_aliases)*
     )
     .into()
+}
+
+/// Expand [`syn::ItemConst`] aliases.
+fn expand_const(item_const: ItemConst, aliases: Aliases) -> TokenStream {
+    let item_const_aliases = aliases.into_iter().map(|alias| {
+        let mut item_const_alias = item_const.clone();
+        item_const_alias.ident = alias.get_ident();
+        match_deprecated!(item_const_alias, alias)
+
+    });
+    quote::quote!(
+        #item_const
+        #(#item_const_aliases)*
+    ).into()
 }
