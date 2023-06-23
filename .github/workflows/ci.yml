@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchains@clippy
+      - uses: dtolnay/rust-toolchain@clippy
       - run: cargo clippy -- -Dclippy::all
       - run: cargo clippy --tests -- -Dclippy:all
     
