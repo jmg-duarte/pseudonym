@@ -31,8 +31,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@clippy
-      - run: cargo clippy -- -Dclippy:all
-      - run: cargo clippy --tests -- -Dclippy:all
+      - run: cargo clippy -- -Dclippy::all
+      - run: cargo clippy --tests -- -Dclippy::all
     
   rustfmt:
     name: Rustfmt
