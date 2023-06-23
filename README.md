@@ -58,6 +58,15 @@ impl S {
 }
 ```
 
+### Constants
+
+```rust
+use pseudonym::alias;
+
+#[alias(ConstAlias)]
+const foo: usize = 0;
+```
+
 ### Deprecating Aliases
 
 Sometimes, you'll need to create aliases to old functions which are deprecated.
