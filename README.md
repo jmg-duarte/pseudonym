@@ -1,5 +1,7 @@
 # pseudonym 🕵️
 
+<img alt="MSRV 1.56.0" src="https://img.shields.io/badge/msrv-1.56.0-blue?style=flat-square">
+
 Declare aliases for Rust constructs with ease!
 
 ```toml
