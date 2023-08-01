@@ -1,0 +1,49 @@
+error: unexpected end of input, expected identifier
+ --> tests/fail/05_item_const.rs:3:1
+  |
+3 | / #[alias(
+4 | |     b,
+5 | |     deprecated(c),
+6 | |     deprecated(d, since = "0.1.0"),
+7 | |     deprecated(e, note = "deprecation note"),
+8 | |     deprecated(f, since = "0.1.0", note = "deprecation note"),
+9 | | )]
+  | |__^
+  |
+  = note: this error originates in the attribute macro `alias` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find value `a` in this scope
+  --> tests/fail/05_item_const.rs:13:16
+   |
+13 |     assert_eq!(a, 5);
+   |                ^ not found in this scope
+
+error[E0425]: cannot find value `b` in this scope
+  --> tests/fail/05_item_const.rs:14:16
+   |
+14 |     assert_eq!(b, 5);
+   |                ^ not found in this scope
+
+error[E0425]: cannot find value `c` in this scope
+  --> tests/fail/05_item_const.rs:15:16
+   |
+15 |     assert_eq!(c, 5);
+   |                ^ not found in this scope
+
+error[E0425]: cannot find value `d` in this scope
+  --> tests/fail/05_item_const.rs:16:16
+   |
+16 |     assert_eq!(d, 5);
+   |                ^ not found in this scope
+
+error[E0425]: cannot find value `e` in this scope
+  --> tests/fail/05_item_const.rs:17:16
+   |
+17 |     assert_eq!(e, 5);
+   |                ^ not found in this scope
+
+error[E0425]: cannot find value `f` in this scope
+  --> tests/fail/05_item_const.rs:18:16
+   |
+18 |     assert_eq!(f, 5);
+   |                ^ not found in this scope
