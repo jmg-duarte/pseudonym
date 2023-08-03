@@ -24,6 +24,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: 1.56.0
+      - run: rustup component add clippy
       - run: cargo clippy -- -Dclippy::all
       - run: cargo clippy --tests -- -Dclippy::all
 
@@ -35,6 +36,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: 1.56.0
+      - run: rustup component add rustfmt
       - run: cargo +1.56.0 fmt --all --check
       - name: Format tests
         run: rustfmt --check tests/**/*.rs
