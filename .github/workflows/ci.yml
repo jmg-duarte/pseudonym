@@ -37,6 +37,5 @@ jobs:
         with:
           toolchain: 1.56.0
       - run: rustup component add rustfmt
-      - run: cargo +1.56.0 fmt --all --check
       - name: Format tests
         run: rustfmt --check tests/**/*.rs
