@@ -5,9 +5,9 @@ use pseudonym::alias;
     deprecated(S2),
     deprecated(S3, since = "0.1.0"),
     deprecated(S4, note = "deprecation note"),
-    deprecated(S5, since = "0.1.0", note = "deprecation note"),
+    deprecated(S5, since = "0.1.0", note = "deprecation note")
 )]
-struct S (i32);
+struct S(i32);
 
 fn main() {
     assert_eq!(S(5).0, 5);

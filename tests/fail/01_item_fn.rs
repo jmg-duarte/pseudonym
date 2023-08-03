@@ -5,7 +5,7 @@ use pseudonym::alias;
     deprecated(c),
     deprecated(d, since = "0.1.0"),
     deprecated(e, note = "deprecation note"),
-    deprecated(f, since = "0.1.0", note = "deprecation note"),
+    deprecated(f, since = "0.1.0", note = "deprecation note")
 )]
 fn a() -> i32 {
     5

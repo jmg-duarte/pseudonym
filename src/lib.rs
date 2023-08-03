@@ -8,7 +8,7 @@ use syn::{
     punctuated::Punctuated,
     spanned::Spanned,
     token::Paren,
-    Ident, Item, ItemFn, ItemImpl, ItemStruct, ItemTrait, LitStr, Token, Type, TypePath, ItemConst,
+    Ident, Item, ItemConst, ItemFn, ItemImpl, ItemStruct, ItemTrait, LitStr, Token, Type, TypePath,
 };
 
 /// [`syn::Ident`] extension functions.
@@ -75,11 +75,7 @@ impl Parse for Deprecated {
             }
         }
 
-        Ok(Self {
-            name,
-            since,
-            note,
-        })
+        Ok(Self { name, since, note })
     }
 }
 
@@ -256,10 +252,10 @@ fn expand_const(item_const: ItemConst, aliases: Aliases) -> TokenStream {
         let mut item_const_alias = item_const.clone();
         item_const_alias.ident = alias.get_ident();
         match_deprecated!(item_const_alias, alias)
-
     });
     quote::quote!(
         #item_const
         #(#item_const_aliases)*
-    ).into()
+    )
+    .into()
 }
